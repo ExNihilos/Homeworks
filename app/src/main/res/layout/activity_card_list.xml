@@ -113,7 +113,7 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.979"
             android:textColor="#458B74"/>
     <ImageView
-            android:layout_width="393dp"
+            android:layout_width="match_parent"
             android:layout_height="229dp"
             app:srcCompat="@drawable/gaini_47"
             android:id="@+id/imageView"

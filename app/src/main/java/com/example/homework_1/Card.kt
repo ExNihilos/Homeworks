@@ -11,13 +11,13 @@ class Card(var _name: String, var  _category:String, var _percent:Int)
     var category: String = "Супермаркеты"
     var percent: Int = 10
 
+
     init
     {
         this.name = _name
         this.category = _category
         this.percent = _percent
     }
-
 
 
 }
