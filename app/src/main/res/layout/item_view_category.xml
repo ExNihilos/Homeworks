@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="@color/BackColor">
 
 
@@ -11,9 +11,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Категория"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_margin="15dp"
+            android:layout_margin="20dp"
     />
 
 

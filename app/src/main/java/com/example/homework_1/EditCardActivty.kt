@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.example.homework_1.CardListActivity.Companion.REQUEST_CODE
+import kotlinx.android.synthetic.main.activity_card_list.*
 import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 
@@ -16,6 +17,7 @@ class EditCardActivty : AppCompatActivity() {
 
     companion object {
         const val REQUEST_CODE = 1
+        var categoryextra = "category"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,10 +52,20 @@ class EditCardActivty : AppCompatActivity() {
         finish()
     }
 
-    fun categoryClick(view: View)
-    {
+    fun categoryClick(view: View) {
         val intent1 = Intent(this, CategoryListActivity::class.java)
         startActivityForResult(intent1, REQUEST_CODE)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+
+            var a = intent.getStringExtra(categoryextra)
+
+            CategoryIT.setText(data?.getStringExtra(categoryextra))
+        }
+    }
 }
+
+
