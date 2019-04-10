@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Категория"
                 android:id="@+id/CategoryIT"
-        />
+                android:onClick="categoryClick"/>
 
     </android.support.design.widget.TextInputLayout>
 

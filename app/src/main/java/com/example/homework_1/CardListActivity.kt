@@ -37,7 +37,6 @@ class CardListActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK) {
-            //var arguments = intent.extras
             var card = data?.getParcelableExtra(Card::class.java.simpleName) as Card
 
             tvCardName.text = card.name
