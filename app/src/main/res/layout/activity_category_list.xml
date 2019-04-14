@@ -15,7 +15,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/toolbar3"
+            android:id="@+id/tb_Category"
 
     >
 
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/rvCategory"
-            app:layout_constraintTop_toTopOf="@+id/toolbar3"
+            app:layout_constraintTop_toTopOf="@+id/tb_Category"
             android:layout_marginTop="50dp"
             app:layout_constraintLeft_toLeftOf="parent">
 

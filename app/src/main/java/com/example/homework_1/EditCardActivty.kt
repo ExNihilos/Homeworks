@@ -45,6 +45,7 @@ class EditCardActivty : AppCompatActivity() {
             return
         }
 
+
         val intent3 = Intent(this, CardListActivity::class.java)
         intent3.putExtra(Card::class.java.simpleName, card1)
 
@@ -57,12 +58,12 @@ class EditCardActivty : AppCompatActivity() {
         startActivityForResult(intent1, REQUEST_CODE)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
 
-            var a = intent.getStringExtra(categoryextra)
-
+        if (resultCode == Activity.RESULT_OK)
+        {
             CategoryIT.setText(data?.getStringExtra(categoryextra))
         }
     }
