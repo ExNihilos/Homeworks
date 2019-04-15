@@ -43,17 +43,6 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <![CDATA[
-
-    Button
-            android:text="Посмотреть"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button"
-            android:onClick="btn1Click" tools:layout_editor_absoluteX="108dp" tools:layout_editor_absoluteY="142dp"/>
-    ]]>
-
-
 
     <TextView
             android:text="Нет Карт"

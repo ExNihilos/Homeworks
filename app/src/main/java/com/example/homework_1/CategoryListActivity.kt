@@ -29,7 +29,6 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         for (i in 1..100)
         {
             categories.add(Category("Категория $i"))
-
         }
 
         categories.add(Category("Супермаркеты"))
@@ -44,7 +43,6 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         intent1.putExtra(EditCardActivty.categoryextra, category.title)
         setResult(Activity.RESULT_OK, intent1)
         finish()
-
     }
 
     fun backClick(view: View)

@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 class EditCardActivty : AppCompatActivity() {
 
-
-    companion object {
+    companion object
+    {
         const val REQUEST_CODE = 1
         var categoryextra = "category"
     }
@@ -26,25 +26,27 @@ class EditCardActivty : AppCompatActivity() {
     }
 
 
-    fun backClick(view: View) {
+    fun backClick(view: View)
+    {
         val intent2 = Intent(this, CardListActivity::class.java)
-
         setResult(Activity.RESULT_CANCELED, intent2)
         finish()
     }
 
 
-    fun saveClick(view: View) {
-        var name = NameIT.text.toString()
-        var category = CategoryIT.text.toString()
-        var percent = PercentIT.text.toString().toInt()
-        var card1 = Card(name, category, percent)
+    fun saveClick(view: View)
+    {
+        val name = NameIT.text.toString()
+        val category = CategoryIT.text.toString()
+        val percent = PercentIT.text.toString().toInt()
+        val photos = arrayListOf("android.resource://com.example.homework_1/drawable/gaini_47",
+            "android.resource://com.example.homework_1/drawable/gaini_47")
+        val card1 = Card(name, category, percent,photos)
 
         if (percent > 100) {
             Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()
             return
         }
-
 
         val intent3 = Intent(this, CardListActivity::class.java)
         intent3.putExtra(Card::class.java.simpleName, card1)
@@ -53,7 +55,8 @@ class EditCardActivty : AppCompatActivity() {
         finish()
     }
 
-    fun categoryClick(view: View) {
+    fun categoryClick(view: View)
+    {
         val intent1 = Intent(this, CategoryListActivity::class.java)
         startActivityForResult(intent1, REQUEST_CODE)
     }

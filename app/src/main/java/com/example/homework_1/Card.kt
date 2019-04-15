@@ -5,11 +5,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 
-class Card(var _name: String, var  _category:String, var _percent:Int)
-    : Parcelable {
+class Card(var _name: String, var  _category:String, var _percent:Int,var photos:ArrayList<String>) : Parcelable
+{
     var name: String = "Карта"
     var category: String = "Супермаркеты"
     var percent: Int = 10
+
 
 
     init
