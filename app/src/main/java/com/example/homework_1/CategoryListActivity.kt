@@ -14,20 +14,17 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
 
     private lateinit var RVcategory: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_list)
         RVcategory = rvCategory
         RVcategory.layoutManager = LinearLayoutManager(this)
-        RVcategory.adapter = CategoryAdapter(this, getCategories(),this)
+        RVcategory.adapter = CategoryAdapter(this, getCategories(), this)
     }
 
-    fun getCategories(): List<Category>
-    {
-        var categories: MutableList<Category> = ArrayList()
-        for (i in 1..100)
-        {
+    fun getCategories(): List<Category> {
+        val categories: MutableList<Category> = ArrayList()
+        for (i in 1..100) {
             categories.add(Category("Категория $i"))
         }
 
@@ -37,18 +34,14 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         return categories
     }
 
-    override fun onItemClick(position: Int, category: Category)
-    {
-        val intent1 = Intent(this, EditCardActivty::class.java)
-        intent1.putExtra(EditCardActivty.categoryextra, category.title)
+    override fun onItemClick(position: Int, category: Category) {
+        val intent1 = Intent(this, EditCardActivity::class.java)
+        intent1.putExtra(EditCardActivity.categoryextra, category.title)
         setResult(Activity.RESULT_OK, intent1)
         finish()
     }
 
-    fun backClick(view: View)
-    {
-        val intent2 = Intent(this, EditCardActivty::class.java)
-        setResult(Activity.RESULT_CANCELED, intent2)
-        finish()
+    fun backClick(view: View) {
+       onBackPressed()
     }
 }

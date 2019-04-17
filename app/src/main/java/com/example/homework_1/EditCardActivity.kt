@@ -7,16 +7,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import com.example.homework_1.CardListActivity.Companion.REQUEST_CODE
-import kotlinx.android.synthetic.main.activity_card_list.*
 import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 
-class EditCardActivty : AppCompatActivity()
-{
+class EditCardActivity : AppCompatActivity() {
 
-    companion object
-    {
+    companion object {
         const val REQUEST_CODE = 1
         var categoryextra = "category"
     }
@@ -27,35 +23,29 @@ class EditCardActivty : AppCompatActivity()
     }
 
 
-    fun backClick(view: View)
-    {
-        val intent2 = Intent(this, CardListActivity::class.java)
-        setResult(Activity.RESULT_CANCELED, intent2)
-        finish()
+    fun backClick(view: View) {
+        onBackPressed()
     }
 
 
-    fun saveClick(view: View)
-    {
+    fun saveClick(view: View) {
         val name = NameIT.text.toString()
         val category = CategoryIT.text.toString()
         val percent = PercentIT.text.toString()
         val photos = arrayListOf(
             "android.resource://com.example.homework_1/drawable/gaini_47",
-            "android.resource://com.example.homework_1/drawable/gaini_47")
+            "android.resource://com.example.homework_1/drawable/gaini_47"
+        )
 
 
-        if (name==""||category==""||percent=="")
-        {
-            Toast.makeText(this,"Заполнены не все поля", LENGTH_SHORT).show()
+        if (name == "" || category == "" || percent == "") {
+            Toast.makeText(this, "Заполнены не все поля", LENGTH_SHORT).show()
         }
 
-        else
-        {
-            val card1 = Card(name, category, percent.toInt(),photos)
+        else {
+            val card1 = Card(name, category, percent.toInt(), photos)
 
-            if (percent.toInt() > 100)
-            {
+            if (percent.toInt() > 100) {
                 Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()
                 return
             }
@@ -69,19 +59,16 @@ class EditCardActivty : AppCompatActivity()
     }
 
 
-    fun categoryClick(view: View)
-    {
+    fun categoryClick(view: View) {
         val intent1 = Intent(this, CategoryListActivity::class.java)
         startActivityForResult(intent1, REQUEST_CODE)
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK)
-        {
+        if (resultCode == Activity.RESULT_OK) {
             CategoryIT.setText(data?.getStringExtra(categoryextra))
         }
     }

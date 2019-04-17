@@ -8,20 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class CardAdapter (val context: Context, var cards: ArrayList<Card>, private var listener: OnAdapterClickListener?) :
-    RecyclerView.Adapter<CardAdapter.CardViewHolder>()
-{
+
+class CardAdapter(val context: Context, var cards: ArrayList<Card>, private var listener: OnAdapterClickListener?) :
+    RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.itemView.tag = cards[position]
         holder.cardname.text = cards[position].name
         holder.category.text = cards[position].category
         holder.percent.text = "Скидка ${cards[position].percent}%"
-        holder.rvCardImage.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        holder.rvCardImage.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rvCardImage.adapter = CardPhotoAdapter(cards[position].photos)
-
-
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_view_card, parent, false)
@@ -29,8 +28,7 @@ class CardAdapter (val context: Context, var cards: ArrayList<Card>, private var
     }
 
 
-    override fun getItemCount(): Int
-    {
+    override fun getItemCount(): Int {
         return cards.size
     }
 
@@ -38,35 +36,31 @@ class CardAdapter (val context: Context, var cards: ArrayList<Card>, private var
     class CardViewHolder(itemView: View, private val listener: OnAdapterClickListener?) :
         RecyclerView.ViewHolder(itemView),
 
-        View.OnClickListener
-    {
+        View.OnClickListener {
         var cardname: TextView = itemView.findViewById(R.id.tvCardName)
         var category: TextView = itemView.findViewById(R.id.tvCategory)
         var percent: TextView = itemView.findViewById(R.id.tvPercent)
-        var rvCardImage : RecyclerView = itemView.findViewById(R.id.rvCardImage)
+        var rvCardImage: RecyclerView = itemView.findViewById(R.id.rvCardImage)
 
-        init
-        {
+        init {
             itemView.setOnClickListener(this)
         }
 
-        override fun onClick(view: View?)
-        {
+        override fun onClick(view: View?) {
             listener?.onItemClick(adapterPosition, itemView.tag as Card)
         }
     }
 
 
-    interface OnAdapterClickListener
-    {
+    interface OnAdapterClickListener {
         fun onItemClick(position: Int, card: Card)
     }
 
-    fun insertItem(item : Card)
-    {
-        cards.add(1,item)
+
+    /*fun insertItem(item: Card) {
+        cards.add(1, item)
         notifyItemInserted(1)
-    }
+    }*/
 
 
 }

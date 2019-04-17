@@ -1,4 +1,5 @@
 package com.example.homework_1
+
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -8,14 +9,15 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_card_list.*
 
 
-class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener  {
+class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener {
 
-    companion object { const val REQUEST_CODE = 1 }
+    companion object {
+        const val REQUEST_CODE = 1
+    }
 
     val cards: ArrayList<Card> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_list)
         /*for (i in 1..5)
@@ -27,19 +29,16 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
     }
 
 
-    fun AddNewCard_Click(view: View)
-    {
-        val intent1 = Intent(this, EditCardActivty::class.java)
+    fun AddNewCard_Click(view: View) {
+        val intent1 = Intent(this, EditCardActivity::class.java)
         startActivityForResult(intent1, REQUEST_CODE)
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
-    {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK)
-        {
+        if (resultCode == Activity.RESULT_OK) {
             var card = data?.getParcelableExtra(Card::class.java.simpleName) as Card
             cards.add(card)
             rvCard.adapter = CardAdapter(this, cards, this)
@@ -49,10 +48,9 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
     }
 
 
-    override fun onItemClick(position: Int, card: Card)
-    {
-        //val intent2221 = Intent(this, EditCardActivty::class.java)
-       //finish()
+    override fun onItemClick(position: Int, card: Card) {
+        //val intent2221 = Intent(this, EditCardActivity::class.java)
+        //finish()
     }
 
 }

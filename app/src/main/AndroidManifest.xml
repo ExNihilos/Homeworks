@@ -11,7 +11,7 @@
             android:theme="@style/AppTheme">
         <activity android:name=".CategoryListActivity">
         </activity>
-        <activity android:name=".EditCardActivty">
+        <activity android:name=".EditCardActivity">
         </activity>
         <activity android:name=".CardListActivity">
             <intent-filter>
