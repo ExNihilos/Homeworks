@@ -29,6 +29,7 @@ class EditCardActivity : AppCompatActivity() {
 
 
     fun saveClick(view: View) {
+
         val name = NameIT.text.toString()
         val category = CategoryIT.text.toString()
         val percent = PercentIT.text.toString()
@@ -43,7 +44,8 @@ class EditCardActivity : AppCompatActivity() {
         }
 
         else {
-            val card1 = Card(name, category, percent.toInt(), photos)
+            val card1 = Card(name, category, try {percent.toInt()}
+            catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, photos)
 
             if (percent.toInt() > 100) {
                 Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()
