@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+            android:text="Название карты"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCardName"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="18dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="280dp"
+    />
+    <TextView
+            android:text="Категория"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvCategory"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/rvCardImage"/>
+    <TextView
+            android:text="Скидка"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPercent" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="12dp"
+            app:layout_constraintHorizontal_bias="0.979"
+            android:textColor="#458B74" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/rvCardImage"/>
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
+            android:scrollbars="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvCardName"
+            android:id="@+id/rvCardImage"
+
+    >
+
+    </android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>
