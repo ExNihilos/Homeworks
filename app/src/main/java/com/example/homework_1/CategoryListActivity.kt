@@ -13,26 +13,28 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
 
 
     private lateinit var RVcategory: RecyclerView
+    val categories: CategoryProvider = CategoryProvider()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_list)
         RVcategory = rvCategory
         RVcategory.layoutManager = LinearLayoutManager(this)
-        RVcategory.adapter = CategoryAdapter(this, getCategories(), this)
+        RVcategory.adapter = CategoryAdapter(this,   categories.getCategory(), this)
     }
 
-    fun getCategories(): List<Category> {
+    /*fun getCategories(): List<Category> {
         val categories: MutableList<Category> = ArrayList()
         for (i in 1..100) {
-            categories.add(Category("Категория $i"))
+            categories.add(Category(1,"Категория $i"))
         }
-
-        categories.add(Category("Супермаркеты"))
-        categories.add(Category("Автомобили"))
-        categories.add(Category("Красота"))
+        categories.add(Category(2,"Одежда и обувь"))
+        categories.add(Category(3,"Супермаркеты"))
+        categories.add(Category(4,"Автомобили"))
+        categories.add(Category(5,"Красота"))
         return categories
-    }
+    }*/
 
     override fun onItemClick(position: Int, category: Category) {
         val intent1 = Intent(this, EditCardActivity::class.java)

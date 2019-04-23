@@ -5,4 +5,4 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 
-data class Card(var name: String, var category: String, var percent: Int, var photos: ArrayList<String>) : Parcelable
+data class Card(var id:Int, var name: String, var category: String, var percent: Int, var photos: ArrayList<String>) : Parcelable

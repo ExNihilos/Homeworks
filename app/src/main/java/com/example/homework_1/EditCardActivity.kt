@@ -12,7 +12,10 @@ import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 class EditCardActivity : AppCompatActivity() {
 
-    companion object {
+    var id: Int =0
+
+    companion object
+    {
         const val REQUEST_CODE = 1
         var categoryextra = "category"
     }
@@ -44,7 +47,8 @@ class EditCardActivity : AppCompatActivity() {
         }
 
         else {
-            val card1 = Card(name, category, try {percent.toInt()}
+            id++
+            val card1 = Card(id,name, category, try {percent.toInt()}
             catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, photos)
 
             if (percent.toInt() > 100) {
