@@ -1,4 +1,8 @@
 package com.example.homework_1
 
-data class Category(var id:Int =0 ,var title: String = "Категория")
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Category(var id:Int =0, var title: String? = "Категория"): Parcelable
 

@@ -7,7 +7,7 @@ fun CategoryRealm.map2Data() = Category(this.ids,this.title)
 fun Category.map2Realm(): CategoryRealm{
     val categoryRealm = CategoryRealm()
     categoryRealm.ids = this.id
-    categoryRealm.title = this.title
+    categoryRealm.title = "SS"//this.title!!
     return  categoryRealm
 }
 

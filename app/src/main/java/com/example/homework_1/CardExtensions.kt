@@ -2,16 +2,16 @@ package com.example.homework_1
 
 import io.realm.RealmList
 
-fun CardRealm.map2Data() = Card(this.id,this.name,this.category,this.percent, this.photos)
+fun CardRealm.map2Data() = Card(this.id,this.name,this.category?.map2Data(),this.percent, this.photos as ArrayList<String>)
 
 fun Card.map2Realm(): CardRealm
 {
     val cardRealm = CardRealm()
     cardRealm.id = this.id
     cardRealm.name = this.name
-    cardRealm.category = this.category
+    cardRealm.category = this.category?.map2Realm()
     cardRealm.percent = this.percent
-    cardRealm.photos = this.photos
+    //cardRealm.photos = this.photos?.map2RealmList()
     return  cardRealm
 }
 
@@ -22,7 +22,9 @@ fun MutableList<Card>.map2RealmList(): RealmList<CardRealm>
     return r1
 }
 
-fun MutableList<CardRealm>.map2DataList(): MutableList<Card>
+
+
+fun MutableList<CardRealm>.map2DataList(): ArrayList<Card>
 {
     val l = ArrayList<Card>()
     this.forEach{l.add(it.map2Data())}

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 
@@ -50,6 +51,11 @@ class EditCardActivity : AppCompatActivity() {
 
             val card1 = Card(id,name, category, try {percent.toInt()}
             catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, photos)
+            Realm.getDefaultInstance().use { realm->
+                realm.beginTransaction()
+                realm.copyFromRealm(realm.copyToRealmOrUpdate(card1.map2Realm()))
+                realm.commitTransaction()
+            }
             id++
             if (percent.toInt() > 100) {
                 Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()

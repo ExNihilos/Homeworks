@@ -15,7 +15,7 @@ class CardAdapter(val context: Context, var cards: ArrayList<Card>, private var 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.itemView.tag = cards[position]
         holder.cardname.text = cards[position].name
-        holder.category.text = cards[position].category
+        holder.category.text = cards[position].category?.title
         holder.percent.text = "Скидка ${cards[position].percent}%"
         holder.rvCardImage.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rvCardImage.adapter = CardPhotoAdapter(cards[position].photos)
