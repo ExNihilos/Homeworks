@@ -4,9 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import io.realm.Realm
+import io.realm.kotlin.createObject
 import kotlinx.android.synthetic.main.activity_category_list.*
 
 class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClickListener {
@@ -19,9 +22,21 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_list)
+        Realm.init(this)
+        val realm: Realm = Realm.getDefaultInstance()
         RVcategory = rvCategory
         RVcategory.layoutManager = LinearLayoutManager(this)
         RVcategory.adapter = CategoryAdapter(this,   categories.getCategory(), this)
+        RVcategory.addItemDecoration(DividerItemDecoration(this,1))
+        realm.beginTransaction()
+       // var categories = categories.getCategory()
+        var categoriess = realm.createObject(CategoryRealm::class.java,1)
+        categoriess.categorylist = categories.getCategory()
+       // var DBcategories = realm.createObject(CategoryRealm::class.java,1)
+        //DBcategories.map2Data()
+
+        realm.commitTransaction()
+
     }
 
     /*fun getCategories(): List<Category> {
@@ -36,14 +51,16 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         return categories
     }*/
 
-    override fun onItemClick(position: Int, category: Category) {
+    override fun onItemClick(position: Int, category: Category)
+    {
         val intent1 = Intent(this, EditCardActivity::class.java)
         intent1.putExtra(EditCardActivity.categoryextra, category.title)
         setResult(Activity.RESULT_OK, intent1)
         finish()
     }
 
-    fun backClick(view: View) {
+    fun backClick(view: View)
+    {
        onBackPressed()
     }
 }
