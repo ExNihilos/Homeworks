@@ -23,19 +23,21 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_list)
         Realm.init(this)
-        val realm: Realm = Realm.getDefaultInstance()
         RVcategory = rvCategory
         RVcategory.layoutManager = LinearLayoutManager(this)
         RVcategory.adapter = CategoryAdapter(this,   categories.getCategory(), this)
         RVcategory.addItemDecoration(DividerItemDecoration(this,1))
-        realm.beginTransaction()
-       // var categories = categories.getCategory()
+        var categories_list = categories.getCategory()
+        Realm.getDefaultInstance().use { realm->
+            realm.beginTransaction()
+            realm.copyFromRealm(realm.copyToRealmOrUpdate(categories_list.map2RealmList()))
+            realm.commitTransaction()
+        }
+       /* realm.beginTransaction()
+        var categories = categories.getCategory()
         var categoriess = realm.createObject(CategoryRealm::class.java,1)
         categoriess.categorylist = categories.getCategory()
-       // var DBcategories = realm.createObject(CategoryRealm::class.java,1)
-        //DBcategories.map2Data()
-
-        realm.commitTransaction()
+        realm.commitTransaction()*/
 
     }
 

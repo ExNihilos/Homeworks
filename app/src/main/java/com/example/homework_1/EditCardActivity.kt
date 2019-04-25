@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 class EditCardActivity : AppCompatActivity() {
 
-    var id: Int =0
+    var id: Int = 1
 
     companion object
     {
@@ -34,7 +34,7 @@ class EditCardActivity : AppCompatActivity() {
     fun saveClick(view: View) {
 
         val name = NameIT.text.toString()
-        val category = CategoryIT.text.toString()
+        val category = Category(id,CategoryIT.text.toString())
         val percent = PercentIT.text.toString()
         val photos = arrayListOf(
             "android.resource://com.example.homework_1/drawable/gaini_47",
@@ -42,15 +42,15 @@ class EditCardActivity : AppCompatActivity() {
         )
 
 
-        if (name == "" || category == "" || percent == "") {
+        if (name == "" || category.title == "" || percent == "") {
             Toast.makeText(this, "Заполнены не все поля", LENGTH_SHORT).show()
         }
 
         else {
-            id++
+
             val card1 = Card(id,name, category, try {percent.toInt()}
             catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, photos)
-
+            id++
             if (percent.toInt() > 100) {
                 Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()
                 return
