@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 class EditCardActivity : AppCompatActivity() {
 
-    var id: Int = 1
+    var cardProvider = CardProvider()
+    var id  = cardProvider.getId()
 
     companion object
     {
@@ -35,29 +36,27 @@ class EditCardActivity : AppCompatActivity() {
     fun saveClick(view: View) {
 
         val name = NameIT.text.toString()
-        val category = Category(id,CategoryIT.text.toString())
+        val category = Category(id.toInt(),CategoryIT.text.toString())
         val percent = PercentIT.text.toString()
-        val photos = arrayListOf(
-            "android.resource://com.example.homework_1/drawable/gaini_47",
-            "android.resource://com.example.homework_1/drawable/gaini_47"
+        val images = mutableListOf(
+            Image(1,"android.resource://com.example.homework_1/drawable/gaini_47"),
+            Image(2,"android.resource://com.example.homework_1/drawable/gaini_47")
         )
 
 
-        if (name == "" || category.title == "" || percent == "") {
+        if (name == "" || category.title == "" || percent == "")
+        {
             Toast.makeText(this, "Заполнены не все поля", LENGTH_SHORT).show()
         }
 
-        else {
-
-            val card1 = Card(id,name, category, try {percent.toInt()}
-            catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, photos)
-            Realm.getDefaultInstance().use { realm->
-                realm.beginTransaction()
-                realm.copyFromRealm(realm.copyToRealmOrUpdate(card1.map2Realm()))
-                realm.commitTransaction()
-            }
+        else
+        {
+            val card1 = Card((1..1000).random(),name, category, try {percent.toInt()}
+            catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, images)
+            cardProvider.saveCardToDB(card1)
             id++
-            if (percent.toInt() > 100) {
+            if (percent.toInt() > 100)
+            {
                 Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()
                 return
             }
@@ -71,16 +70,19 @@ class EditCardActivity : AppCompatActivity() {
     }
 
 
-    fun categoryClick(view: View) {
+    fun categoryClick(view: View)
+    {
         val intent1 = Intent(this, CategoryListActivity::class.java)
         startActivityForResult(intent1, REQUEST_CODE)
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK)
+        {
             CategoryIT.setText(data?.getStringExtra(categoryextra))
         }
     }

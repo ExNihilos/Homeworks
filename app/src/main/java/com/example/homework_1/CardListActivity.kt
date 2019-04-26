@@ -22,51 +22,37 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
         const val REQUEST_CODE = 1
     }
 
-    var cards: MutableList<Card> = ArrayList()
+
+    var cardProvider = CardProvider()
+    //val card = Card(0,"", Category(1,""),0,ArrayList())
+    var cards = mutableListOf<Card>()
+    //val adapter = CardAdapter(this, cards,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_list)
         Realm.init(this)
-        Realm.getDefaultInstance()
-
-        //if (cards[1].name ==null) {Toast.makeText(this, "Карт нету", LENGTH_SHORT).show()}
-        //else {Toast.makeText(this, "Карты есть", LENGTH_SHORT).show()}
-        /*for (i in 1..5)
+        var cards = cardProvider.getCardsFromDB()
+        if (cards.isNotEmpty())
         {
-            cards.add(Card("Карта$i","Категория", 10))
-        }*/
+            Toast.makeText(this, "Карты загружены", LENGTH_SHORT).show()
+            tvNoCard.visibility = View.INVISIBLE
+            tvStartInfo.visibility = View.INVISIBLE
+        }
+
         rvCard.layoutManager = LinearLayoutManager(this)
-        rvCard.adapter = CardAdapter(this, cards as ArrayList<Card> , this)
+        rvCard.adapter = CardAdapter(this, cards, this)
 
       //  if (cards!=null)
         //{
 
-        try {
-            Realm.getDefaultInstance().use { realm ->
-
-                val results = realm.where(CardRealm::class.java).findAll()
-
-                    cards = realm.copyFromRealm(results).map2DataList()
-                if (cards.isEmpty() == true)
-                { Toast.makeText(this, "Карты есть", LENGTH_SHORT).show()
-                    cards = realm.copyFromRealm(results).map2DataList()}
-            }
-
-            rvCard.adapter = CardAdapter(this, cards as ArrayList<Card>, this)
-            tvNoCard.visibility = View.INVISIBLE
-             //tvStartInfo.visibility = View.INVISIBLE
-
-
-         } catch (e:Throwable) {Toast.makeText(this, e.toString(), LENGTH_LONG).show()}
        /*Realm.getDefaultInstance().use { realm ->
            val results = realm.where(CardRealm::class.java).findAll()
             cards = realm.copyFromRealm(results).map2DataList()
 
            {
             rvCard.adapter = CardAdapter(this, cards as ArrayList<Card>, this)
-            tvNoCard.visibility = View.INVISIBLE
-            tvStartInfo.visibility = View.INVISIBLE
+
            }
            return realm.copyFromRealm(results).map2DataList()
        }
@@ -82,13 +68,15 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK)
+        {
             var card = data?.getParcelableExtra(Card::class.java.simpleName) as Card
             cards.add(card)
-            rvCard.adapter = CardAdapter(this, cards as ArrayList<Card>, this)
+            rvCard.adapter = CardAdapter(this, cards, this)
             tvNoCard.visibility = View.INVISIBLE
             tvStartInfo.visibility = View.INVISIBLE
         }

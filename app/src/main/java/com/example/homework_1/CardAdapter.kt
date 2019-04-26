@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 
 
-class CardAdapter(val context: Context, var cards: ArrayList<Card>, private var listener: OnAdapterClickListener?) :
+class CardAdapter(val context: Context, var cards: MutableList<Card>, private var listener: OnAdapterClickListener?) :
     RecyclerView.Adapter<CardAdapter.CardViewHolder>() {
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
@@ -18,7 +18,7 @@ class CardAdapter(val context: Context, var cards: ArrayList<Card>, private var 
         holder.category.text = cards[position].category?.title
         holder.percent.text = "Скидка ${cards[position].percent}%"
         holder.rvCardImage.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        holder.rvCardImage.adapter = CardPhotoAdapter(cards[position].photos)
+        holder.rvCardImage.adapter = CardPhotoAdapter(cards[position].images!!)
     }
 
 

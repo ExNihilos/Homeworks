@@ -12,7 +12,5 @@ open class CardRealm : RealmModel {
     var name: String = ""
     var category: CategoryRealm? = null
     var percent: Int = 0
-    var photos: RealmList<String>? = null
-    //var categorylist = mutableListOf<Category>()
-
+    var images: RealmList<ImageRealm>? = null
 }

@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 
-class CardPhotoAdapter(var photos: ArrayList<String>) : RecyclerView.Adapter<CardPhotoAdapter.CardPhotoViewHolder>() {
+class CardPhotoAdapter(var images: MutableList<Image>) : RecyclerView.Adapter<CardPhotoAdapter.CardPhotoViewHolder>() {
 
     override fun onBindViewHolder(holder: CardPhotoViewHolder, position: Int) {
-        holder.photo.setImageURI(Uri.parse(photos[position]))
+        holder.image.setImageURI(Uri.parse(images[position].url))
     }
 
 
@@ -21,12 +21,12 @@ class CardPhotoAdapter(var photos: ArrayList<String>) : RecyclerView.Adapter<Car
 
 
     override fun getItemCount(): Int {
-        return photos.size
+        return images.size
     }
 
 
     class CardPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var photo: ImageView = itemView.findViewById(R.id.photo1)
+        var image: ImageView = itemView.findViewById(R.id.photo1)
     }
 
 
