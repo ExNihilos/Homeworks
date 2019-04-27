@@ -7,14 +7,15 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import io.realm.Realm
+import com.example.homework_1.CardListActivity.Companion.REQUEST_CODE
+import com.example.homework_1.Providers.CardProvider
 import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 
 class EditCardActivity : AppCompatActivity() {
 
     var cardProvider = CardProvider()
-    var id  = cardProvider.getId()
+    var id = cardProvider.getId()?.plus(1)
 
     companion object
     {
@@ -28,15 +29,20 @@ class EditCardActivity : AppCompatActivity() {
     }
 
 
-    fun backClick(view: View) {
+    fun backClick(view: View)
+    {
         onBackPressed()
     }
 
 
-    fun saveClick(view: View) {
-
+    fun saveClick(view: View)
+    {
+        if (id==null)
+        {
+            id=1
+        }
         val name = NameIT.text.toString()
-        val category = Category(id.toInt(),CategoryIT.text.toString())
+        val category = Category(id!!.toInt(),CategoryIT.text.toString())
         val percent = PercentIT.text.toString()
         val images = mutableListOf(
             Image(1,"android.resource://com.example.homework_1/drawable/gaini_47"),
@@ -51,19 +57,24 @@ class EditCardActivity : AppCompatActivity() {
 
         else
         {
-            val card1 = Card((1..1000).random(),name, category, try {percent.toInt()}
+            if (id==null)
+            {
+                id=1
+            }
+
+            val card1 = Card(id!!,name, category, try {percent.toInt()}
             catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, images)
-            cardProvider.saveCardToDB(card1)
-            id++
+
             if (percent.toInt() > 100)
             {
                 Toast.makeText(this, "Скидка не может быть больше 100%!", LENGTH_SHORT).show()
                 return
             }
 
+            cardProvider.saveCardToDB(card1)
+            id = id!!+1
             val intent3 = Intent(this, CardListActivity::class.java)
             intent3.putExtra(Card::class.java.simpleName, card1)
-
             setResult(Activity.RESULT_OK, intent3)
             finish()
         }

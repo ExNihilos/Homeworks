@@ -1,4 +1,6 @@
-package com.example.homework_1
+package com.example.homework_1.Providers
+
+import com.example.homework_1.Category
 
 class CategoryProvider
 {

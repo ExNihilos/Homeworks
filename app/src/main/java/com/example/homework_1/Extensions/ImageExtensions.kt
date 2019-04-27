@@ -1,9 +1,11 @@
-package com.example.homework_1
+package com.example.homework_1.Extensions
 
+import com.example.homework_1.Image
+import com.example.homework_1.Realm.ImageRealm
 import io.realm.RealmList
 
 
-fun Image.mapToRealm():ImageRealm
+fun Image.mapToRealm(): ImageRealm
 {
     val imageRealm = ImageRealm()
     imageRealm.id = this.id

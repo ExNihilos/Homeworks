@@ -1,6 +1,10 @@
-package com.example.homework_1
+package com.example.homework_1.Providers
 
 import android.content.Context
+import com.example.homework_1.Card
+import com.example.homework_1.Realm.CardRealm
+import com.example.homework_1.Extensions.map2DataList
+import com.example.homework_1.Extensions.map2Realm
 import io.realm.Realm
 
 class CardProvider
@@ -32,13 +36,14 @@ class CardProvider
         }
     }
 
-    fun getId(): Long
+    fun getId(): Int?
     {
         Realm.getDefaultInstance().use { realm ->
             val result = realm
-                .where(CardRealm::class.java).count()
-
-            return result
+                .where(CardRealm::class.java)
+                .findAll()
+            val last = result.lastOrNull()
+            return last?.id
         }
     }
 

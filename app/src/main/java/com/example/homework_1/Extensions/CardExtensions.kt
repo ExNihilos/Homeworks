@@ -1,8 +1,16 @@
-package com.example.homework_1
+package com.example.homework_1.Extensions
 
+import com.example.homework_1.*
+import com.example.homework_1.Realm.CardRealm
 import io.realm.RealmList
 
-fun CardRealm.map2Data() = Card(this.id,this.name,this.category?.map2Data(),this.percent, this.images?.mapToDataList())
+fun CardRealm.map2Data() = Card(
+    this.id,
+    this.name,
+    this.category?.map2Data(),
+    this.percent,
+    this.images?.mapToDataList()
+)
 
 fun Card.map2Realm(): CardRealm
 {

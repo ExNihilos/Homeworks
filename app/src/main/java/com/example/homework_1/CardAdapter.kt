@@ -32,6 +32,11 @@ class CardAdapter(val context: Context, var cards: MutableList<Card>, private va
         return cards.size
     }
 
+    fun insertItem(item: Card) {
+        cards.add(0, item)
+        notifyItemInserted(0)
+    }
+
 
     class CardViewHolder(itemView: View, private val listener: OnAdapterClickListener?) :
         RecyclerView.ViewHolder(itemView),
@@ -56,11 +61,6 @@ class CardAdapter(val context: Context, var cards: MutableList<Card>, private va
         fun onItemClick(position: Int, card: Card)
     }
 
-
-    /*fun insertItem(item: Card) {
-        cards.add(1, item)
-        notifyItemInserted(1)
-    }*/
 
 
 }

@@ -1,8 +1,10 @@
-package com.example.homework_1
+package com.example.homework_1.Extensions
 
+import com.example.homework_1.Category
+import com.example.homework_1.Realm.CategoryRealm
 import io.realm.RealmList
 
-fun CategoryRealm.map2Data() = Category(this.ids,this.title)
+fun CategoryRealm.map2Data() = Category(this.ids, this.title)
 
 fun Category.map2Realm(): CategoryRealm
 {

@@ -8,15 +8,17 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.example.homework_1.Extensions.map2RealmList
+import com.example.homework_1.Providers.CategoryProvider
 import io.realm.Realm
-import io.realm.kotlin.createObject
 import kotlinx.android.synthetic.main.activity_category_list.*
 
 class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClickListener {
 
 
     private lateinit var RVcategory: RecyclerView
-    val categories: CategoryProvider = CategoryProvider()
+    val categories: CategoryProvider =
+        CategoryProvider()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

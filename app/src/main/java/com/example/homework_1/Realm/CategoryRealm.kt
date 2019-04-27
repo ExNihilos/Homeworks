@@ -1,4 +1,4 @@
-package com.example.homework_1
+package com.example.homework_1.Realm
 
 import io.realm.RealmModel
 import io.realm.RealmObject
