@@ -6,7 +6,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
+import com.example.homework_1.Providers.CardProvider
+import io.realm.Realm
+
 import kotlinx.android.synthetic.main.activity_card_list.*
+import kotlinx.android.synthetic.main.activity_card_list.view.*
 
 
 class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener {
@@ -15,17 +21,24 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
         const val REQUEST_CODE = 1
     }
 
-    val cards: ArrayList<Card> = ArrayList()
+
+    var cardProvider = CardProvider()
+    var cards = mutableListOf<Card>()
+    //val adapter = CardAdapter(this,cards,this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_card_list)
-        /*for (i in 1..5)
+        cards = cardProvider.getCardsFromDB()
+        if (cards.isNotEmpty())
         {
-            cards.add(Card("Карта$i","Категория", 10))
-        }*/
+            Toast.makeText(this, "Карты загружены", LENGTH_SHORT).show()
+            tvNoCard.visibility = View.INVISIBLE
+            tvStartInfo.visibility = View.INVISIBLE
+        }
+
         rvCard.layoutManager = LinearLayoutManager(this)
-        rvCard.adapter = CardAdapter(this, cards, this)
+        rvCard.adapter= CardAdapter(this,cards,this)
     }
 
 
@@ -35,12 +48,17 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
-            var card = data?.getParcelableExtra(Card::class.java.simpleName) as Card
-            cards.add(card)
+        if (resultCode == Activity.RESULT_OK)
+        {
+            //var card = data?.getParcelableExtra(Card::class.java.simpleName) as Card
+            //  cards.add(card)
+           // adapter.insertItem(card)
+            //(rvCard.adapter as CardAdapter).notifyItemInserted(1)
+            cards = cardProvider.getCardsFromDB()
             rvCard.adapter = CardAdapter(this, cards, this)
             tvNoCard.visibility = View.INVISIBLE
             tvStartInfo.visibility = View.INVISIBLE
@@ -48,9 +66,9 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
     }
 
 
-    override fun onItemClick(position: Int, card: Card) {
-        //val intent2221 = Intent(this, EditCardActivity::class.java)
-        //finish()
+    override fun onItemClick(position: Int, card: Card)
+    {
+
     }
 
 }
