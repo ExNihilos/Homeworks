@@ -1,4 +1,4 @@
-package com.example.homework_1
+package com.example.homework_1.Presentation.Category
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.homework_1.Domain.Models.Category
+import com.example.homework_1.R
+
 
 class CategoryAdapter(var context: Context, var data: List<Category>, private var listener: OnAdapterClickListener?) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
@@ -21,28 +24,31 @@ class CategoryAdapter(var context: Context, var data: List<Category>, private va
     }
 
 
-    override fun getItemCount(): Int {
+    override fun getItemCount(): Int
+    {
         return data.size
     }
 
 
     class CategoryViewHolder(itemView: View?, private val listener: OnAdapterClickListener?) : RecyclerView.ViewHolder
         (itemView!!),
-
         View.OnClickListener {
         var title: TextView = itemView!!.findViewById(R.id.tv_CategoryItem)
 
-        init {
+        init
+        {
             itemView!!.setOnClickListener(this)
         }
 
-        override fun onClick(view: View?) {
+        override fun onClick(view: View?)
+        {
             listener?.onItemClick(adapterPosition, itemView.tag as Category)
         }
     }
 
 
-    interface OnAdapterClickListener {
+    interface OnAdapterClickListener
+    {
         fun onItemClick(position: Int, category: Category)
     }
 

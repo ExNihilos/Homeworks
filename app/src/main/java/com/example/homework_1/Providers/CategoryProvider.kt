@@ -1,6 +1,6 @@
 package com.example.homework_1.Providers
 
-import com.example.homework_1.Category
+import com.example.homework_1.Domain.Models.Category
 
 class CategoryProvider
 {

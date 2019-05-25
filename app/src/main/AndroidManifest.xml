@@ -12,14 +12,13 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true"
     >
-        <activity android:name=".CategoryListActivity">
+        <activity android:name=".Presentation.Category.CategoryListActivity">
         </activity>
         <activity android:name=".EditCardActivity">
         </activity>
         <activity android:name=".CardListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

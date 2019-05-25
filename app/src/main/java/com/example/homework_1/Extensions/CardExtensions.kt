@@ -1,8 +1,9 @@
 package com.example.homework_1.Extensions
 
-import com.example.homework_1.*
+import com.example.homework_1.Domain.Models.Card
 import com.example.homework_1.Realm.CardRealm
 import io.realm.RealmList
+
 
 fun CardRealm.map2Data() = Card(
     this.id,
@@ -29,7 +30,6 @@ fun MutableList<Card>.map2RealmList(): RealmList<CardRealm>
     this.forEach{r1.add(it.map2Realm())}
     return r1
 }
-
 
 
 fun MutableList<CardRealm>.map2DataList(): MutableList<Card>

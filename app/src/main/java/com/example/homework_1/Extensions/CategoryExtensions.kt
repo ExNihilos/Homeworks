@@ -1,6 +1,6 @@
 package com.example.homework_1.Extensions
 
-import com.example.homework_1.Category
+import com.example.homework_1.Domain.Models.Category
 import com.example.homework_1.Realm.CategoryRealm
 import io.realm.RealmList
 

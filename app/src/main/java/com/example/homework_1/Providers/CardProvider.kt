@@ -1,7 +1,7 @@
 package com.example.homework_1.Providers
 
 import android.content.Context
-import com.example.homework_1.Card
+import com.example.homework_1.Domain.Models.Card
 import com.example.homework_1.Realm.CardRealm
 import com.example.homework_1.Extensions.map2DataList
 import com.example.homework_1.Extensions.map2Realm
@@ -13,7 +13,8 @@ class CardProvider
     val imageProvider: ImageProvider
     val categoryProvider: CategoryProvider
 
-    init {
+    init
+    {
         imageProvider = ImageProvider()
         categoryProvider = CategoryProvider()
     }

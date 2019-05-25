@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import com.example.homework_1.CardListActivity.Companion.REQUEST_CODE
+import com.example.homework_1.Domain.Models.Card
+import com.example.homework_1.Domain.Models.Category
+import com.example.homework_1.Domain.Models.Image
+import com.example.homework_1.Presentation.Category.CategoryListActivity
 import com.example.homework_1.Providers.CardProvider
 import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
@@ -41,12 +44,16 @@ class EditCardActivity : AppCompatActivity() {
         {
             id=1
         }
+
         val name = NameIT.text.toString()
-        val category = Category(id!!.toInt(),CategoryIT.text.toString())
+        val category = Category(id!!.toInt(), CategoryIT.text.toString())
         val percent = PercentIT.text.toString()
         val images = mutableListOf(
-            Image(1,"android.resource://com.example.homework_1/drawable/gaini_47"),
-            Image(2,"android.resource://com.example.homework_1/drawable/gaini_47")
+            Image(
+                1,
+                "android.resource://com.example.homework_1/drawable/gaini_47"
+            ),
+            Image(2, "android.resource://com.example.homework_1/drawable/gaini_47")
         )
 
 
@@ -62,8 +69,13 @@ class EditCardActivity : AppCompatActivity() {
                 id=1
             }
 
-            val card1 = Card(id!!,name, category, try {percent.toInt()}
-            catch (e:NumberFormatException){Toast.makeText(this,"Неверный формат скидки", LENGTH_SHORT).show(); return}, images)
+            val card1 = Card(
+                id!!, name, category, try {
+                    percent.toInt()
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(this, "Неверный формат скидки", LENGTH_SHORT).show(); return
+                }, images
+            )
 
             if (percent.toInt() > 100)
             {

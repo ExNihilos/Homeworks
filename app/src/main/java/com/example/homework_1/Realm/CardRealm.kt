@@ -6,7 +6,8 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 
 @RealmClass
-open class CardRealm : RealmModel {
+open class CardRealm : RealmModel
+{
     @PrimaryKey
     var id: Int = 1
     var name: String = ""

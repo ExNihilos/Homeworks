@@ -1,8 +1,7 @@
-package com.example.homework_1
+package com.example.homework_1.Presentation.Category
 
 import android.app.Activity
 import android.content.Intent
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
@@ -10,9 +9,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import com.example.homework_1.Domain.Models.Category
+import com.example.homework_1.EditCardActivity
 import com.example.homework_1.Extensions.map2RealmList
-import com.example.homework_1.Providers.CategoryProvider
-import com.example.homework_1.Services.CategoryService
+import com.example.homework_1.R
 import com.example.homework_1.Services.RXCategoryService
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Observable
@@ -21,18 +21,25 @@ import kotlinx.android.synthetic.main.activity_category_list.*
 import retrofit2.Retrofit
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
-class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClickListener {
 
+class CategoryListActivity : AppCompatActivity(), ICategoryListView, CategoryAdapter.OnAdapterClickListener {
 
     private lateinit var RVcategory: RecyclerView
     //val categories: CategoryProvider = CategoryProvider() // Локальный провайдер категорий
+    lateinit var presentor: CategoryListPresentor
+    override fun showProgress(b: Boolean) {
+        progressBar.visibility = if (b) View.VISIBLE else View.GONE
+    }
 
+    override fun showMessage(s: String) {
+        Log.d("TAG",s)
+    }
+
+    override fun showCatList(categoryList: MutableList<Category>) {
+        RVcategory.adapter = CategoryAdapter(this,categoryList,this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,23 +50,27 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         RVcategory.layoutManager = LinearLayoutManager(this)
         RVcategory.addItemDecoration(DividerItemDecoration(this,1))
         //RVcategory.adapter = CategoryAdapter(this,   categories.getCategory(), this) // Локальная загрузка категорий
+        presentor = CategoryListPresentor()
+        presentor.view = this
+        presentor.attachView()
 
 
-        val retrofitRX: Retrofit = Retrofit.Builder() // Загрузка категорий из бэкэнда с помощью RX
+        /*val retrofitRX: Retrofit = Retrofit.Builder() // Загрузка категорий из бэкэнда с помощью RX
             .baseUrl("http://cardbag.ru/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
 
         val RXservice = retrofitRX.create(RXCategoryService::class.java)
-        val reposRx: Observable<List<Category>> = RXservice.getCategories()
+        val reposRx: Observable<MutableList<Category>> = RXservice.getCategories()
         reposRx.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     categories ->
-                    var categoryList = categories as MutableList<Category>
-                    RVcategory.adapter = CategoryAdapter(this,categoryList,this)
+                    val categoryList = categories as MutableList<Category>
+                    RVcategory.adapter =
+                        CategoryAdapter(this, categoryList, this)
                     progressBar.visibility = View.GONE
                     Realm.getDefaultInstance().use { realm->
                         realm.beginTransaction()
@@ -73,11 +84,13 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
                     error.printStackTrace()
                     progressBar.visibility = View.GONE
                 }
-            )
+            )*/
 
 
-         //var categories_list = categories.getCategory() Локальный список категорий
 
+
+
+         //var categories_list = categories.getCategory() //Локальный список категорий
 
        /* val retrofit: Retrofit = Retrofit.Builder()            // Загрузка категорий из бэкэнда с помощью Retrofit
             .baseUrl("http://cardbag.ru/api/")
@@ -109,12 +122,6 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
         })*/
     }
 
-    /*fun getCategories(): List<Category> {
-        val categories: MutableList<Category> = ArrayList()
-        for (i in 1..100) {
-            categories.add(Category(1,"Категория $i"))
-        }
-    }*/
 
     override fun onItemClick(position: Int, category: Category)
     {
@@ -127,5 +134,10 @@ class CategoryListActivity : AppCompatActivity(), CategoryAdapter.OnAdapterClick
     fun backClick(view: View)
     {
        onBackPressed()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presentor.dettachView()
     }
 }

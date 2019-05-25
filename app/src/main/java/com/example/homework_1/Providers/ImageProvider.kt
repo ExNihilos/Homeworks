@@ -1,6 +1,6 @@
 package com.example.homework_1.Providers
 
-import com.example.homework_1.Image
+import com.example.homework_1.Domain.Models.Image
 
 class ImageProvider
 {
@@ -13,5 +13,4 @@ class ImageProvider
     {
         return images
     }
-
 }
