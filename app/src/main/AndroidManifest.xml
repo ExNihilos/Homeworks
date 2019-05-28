@@ -14,9 +14,9 @@
     >
         <activity android:name=".Presentation.Category.CategoryListActivity">
         </activity>
-        <activity android:name=".EditCardActivity">
+        <activity android:name=".Presentation.Card.EditCardActivity">
         </activity>
-        <activity android:name=".CardListActivity">
+        <activity android:name=".Presentation.Card.CardListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

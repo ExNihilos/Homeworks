@@ -1,4 +1,4 @@
-package com.example.homework_1
+package com.example.homework_1.Presentation.Card
 
 import android.app.Activity
 import android.content.Intent
@@ -10,10 +10,11 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import com.example.homework_1.Domain.Models.Card
 import com.example.homework_1.Providers.CardProvider
+import com.example.homework_1.R
 import kotlinx.android.synthetic.main.activity_card_list.*
 
-class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener {
-
+class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
+{
     companion object {const val REQUEST_CODE = 1}
 
     var cardProvider = CardProvider()
@@ -32,11 +33,12 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
         }
 
         rvCard.layoutManager = LinearLayoutManager(this)
-        rvCard.adapter= CardAdapter(this,cards,this)
+        rvCard.adapter= CardAdapter(this, cards, this)
     }
 
 
-    fun AddNewCard_Click(view: View) {
+    fun AddNewCard_Click(view: View)
+    {
         val intent1 = Intent(this, EditCardActivity::class.java)
         startActivityForResult(intent1, REQUEST_CODE)
     }
@@ -59,9 +61,7 @@ class CardListActivity : AppCompatActivity(), CardAdapter.OnAdapterClickListener
     }
 
     override fun onItemClick(position: Int, card: Card)
-    {
-
-    }
+    {}
 
 }
 

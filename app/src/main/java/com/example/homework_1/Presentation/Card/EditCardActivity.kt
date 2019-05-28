@@ -1,4 +1,4 @@
-package com.example.homework_1
+package com.example.homework_1.Presentation.Card
 
 import android.app.Activity
 import android.content.Intent
@@ -12,6 +12,7 @@ import com.example.homework_1.Domain.Models.Category
 import com.example.homework_1.Domain.Models.Image
 import com.example.homework_1.Presentation.Category.CategoryListActivity
 import com.example.homework_1.Providers.CardProvider
+import com.example.homework_1.R
 import kotlinx.android.synthetic.main.activity_edit_card_activty.*
 
 
@@ -31,12 +32,10 @@ class EditCardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_card_activty)
     }
 
-
     fun backClick(view: View)
     {
         onBackPressed()
     }
-
 
     fun saveClick(view: View)
     {
@@ -49,10 +48,7 @@ class EditCardActivity : AppCompatActivity() {
         val category = Category(id!!.toInt(), CategoryIT.text.toString())
         val percent = PercentIT.text.toString()
         val images = mutableListOf(
-            Image(
-                1,
-                "android.resource://com.example.homework_1/drawable/gaini_47"
-            ),
+            Image(1, "android.resource://com.example.homework_1/drawable/gaini_47"),
             Image(2, "android.resource://com.example.homework_1/drawable/gaini_47")
         )
 
@@ -92,18 +88,17 @@ class EditCardActivity : AppCompatActivity() {
         }
     }
 
-
     fun categoryClick(view: View)
     {
         val intent1 = Intent(this, CategoryListActivity::class.java)
-        startActivityForResult(intent1, REQUEST_CODE)
+        startActivityForResult(intent1,
+            REQUEST_CODE
+        )
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
     {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (resultCode == Activity.RESULT_OK)
         {
             CategoryIT.setText(data?.getStringExtra(categoryextra))

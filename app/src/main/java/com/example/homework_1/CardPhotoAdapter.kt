@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.homework_1.Domain.Models.Image
 
-class CardPhotoAdapter(var images: MutableList<Image>) : RecyclerView.Adapter<CardPhotoAdapter.CardPhotoViewHolder>() {
-
+class CardPhotoAdapter(var images: MutableList<Image>) : RecyclerView.Adapter<CardPhotoAdapter.CardPhotoViewHolder>()
+{
     override fun onBindViewHolder(holder: CardPhotoViewHolder, position: Int)
     {
         holder.image.setImageURI(Uri.parse(images[position].url))
@@ -26,10 +26,9 @@ class CardPhotoAdapter(var images: MutableList<Image>) : RecyclerView.Adapter<Ca
         return images.size
     }
 
-
-    class CardPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class CardPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    {
         var image: ImageView = itemView.findViewById(R.id.photo1)
     }
-
 
 }

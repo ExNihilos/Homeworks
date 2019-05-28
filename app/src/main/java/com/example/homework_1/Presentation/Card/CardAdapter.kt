@@ -1,4 +1,4 @@
-package com.example.homework_1
+package com.example.homework_1.Presentation.Card
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.homework_1.CardPhotoAdapter
 import com.example.homework_1.Domain.Models.Card
+import com.example.homework_1.R
 
 
 class CardAdapter(val context: Context, var cards: MutableList<Card>, private var listener: OnAdapterClickListener?) :
