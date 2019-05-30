@@ -5,4 +5,4 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Image (var id:Int =0 ,
-                  var url:String = "") : Parcelable
+                  var url:String? = "") : Parcelable
